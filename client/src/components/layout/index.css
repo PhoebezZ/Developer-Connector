@@ -1,0 +1,30 @@
+.navbar {
+    background-color: #62B8B1;
+}
+
+.icon {
+    height: 30px;
+    width: 30px;
+    border-radius: 2px;
+    /* margin-right: 10px; */
+}
+
+.button1-bgc {
+    background-color: #62B8B1;
+}
+
+.button1-color {
+    color: white;
+}
+
+.button2-bgc {
+    background-color: white;
+}
+
+.button2-color {
+    color: #62B8B1;
+}
+
+.footer {
+    background-color: #62B8B1;
+}
