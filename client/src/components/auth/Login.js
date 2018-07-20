@@ -1,14 +1,6 @@
 import React, { Component } from 'react'
 
 class Login extends Component {
-    // render() {
-    //     return (
-    //         <div>
-    //             Login
-    //         </div>
-    //     )
-    // }
-
     constructor(props) {
         super(props);
         this.state = {
