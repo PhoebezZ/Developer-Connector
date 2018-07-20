@@ -35,6 +35,7 @@ class Login extends Component {
 
     render() {
         return (
+<<<<<<< HEAD
             <div className="register">
                 <div className="container">
                     <div className="row">
@@ -68,6 +69,10 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
+=======
+            <div>
+                Login
+>>>>>>> b39cb234936ec683c5c949c3fc0344809180f308
             </div>
         );
     }
