@@ -1,23 +1,23 @@
-import React, { Component } from 'react'
-import './index.css';
+import React, { Component } from "react";
+import "./index.css";
 
 class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            email: '',
-            password: '',
-            password2: '',
+            name: "",
+            email: "",
+            password: "",
+            password2: "",
             errors: {}
         };
     }
 
-    onChange = (e) => {
+    onChange = e => {
         this.setState({ [e.target.name]: e.target.value });
-    }
+    };
 
-    onSubmit = (e) => {
+    onSubmit = e => {
         e.preventDefault();
 
         // Save to redux later
@@ -26,10 +26,10 @@ class Register extends Component {
             email: this.state.email,
             password: this.state.password,
             password2: this.state.password2
-        }
+        };
 
         console.log(newUser);
-    }
+    };
 
     render() {
         return (
@@ -59,7 +59,10 @@ class Register extends Component {
                                         value={this.state.email}
                                         onChange={this.onChange}
                                     />
-                                    <small className="form-text text-muted">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
+                                    <small className="form-text text-muted">
+                                        This site uses Gravatar so if you want a profile image, use
+                                        a Gravatar email
+                  </small>
                                 </div>
                                 <div className="form-group">
                                     <input
@@ -81,16 +84,13 @@ class Register extends Component {
                                         onChange={this.onChange}
                                     />
                                 </div>
-                                <input
-                                    type="submit"
-                                    className="btn btn-block mt-4 button"
-                                />
+                                <input type="submit" className="btn btn-block mt-4 button" />
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
