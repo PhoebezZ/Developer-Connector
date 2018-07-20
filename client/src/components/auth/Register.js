@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 import "./index.css";
 
 class Register extends Component {
@@ -20,7 +21,6 @@ class Register extends Component {
     onSubmit = e => {
         e.preventDefault();
 
-        // Save to redux later
         const newUser = {
             name: this.state.name,
             email: this.state.email,
@@ -28,7 +28,13 @@ class Register extends Component {
             password2: this.state.password2
         };
 
-        console.log(newUser);
+        axios({
+            method: 'post',
+            url: '/api/users/register',
+            data: newUser
+        })
+            .then(response => console.log(response.data))
+            .catch(err => console.log(err.response.data));
     };
 
     render() {
