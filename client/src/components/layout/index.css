@@ -9,19 +9,13 @@
     /* margin-right: 10px; */
 }
 
-.button1-bgc {
+.button1 {
     background-color: #62B8B1;
-}
-
-.button1-color {
     color: white;
 }
 
-.button2-bgc {
+.button2 {
     background-color: white;
-}
-
-.button2-color {
     color: #62B8B1;
 }
 
