@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
 import TextFieldGourp from '../common/TextFieldGroup';
 // import classnames from 'classnames';
-import "./index.css";
 
 class Register extends Component {
     constructor(props) {
@@ -92,7 +91,7 @@ class Register extends Component {
                                     onChange={this.onChange}
                                     error={errors.password2}
                                 />
-                                <input type="submit" className="btn btn-block mt-4 button" />
+                                <input type="submit" className="btn btn-block mt-4" style={{ backgroundColor: '#C3E2DD', color: 'white' }} />
                             </form>
                         </div>
                     </div>

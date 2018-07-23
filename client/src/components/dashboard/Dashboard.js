@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profileActions';
+import Spinner from '../common/Spinner';
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -9,12 +11,57 @@ class Dashboard extends Component {
     }
 
     render() {
+        const { user } = this.props.auth;
+        const { profile, loading } = this.props.profile;
+
+        let dashboardContent;
+        if (profile === null || loading) {
+            dashboardContent = <Spinner />
+        } else {
+            // dashboardContent = <h1>Hello</h1>
+            // Check if logged in user has profile data
+            if (Object.keys(profile).length > 0) {
+                dashboardContent = <h4>Display profile</h4>
+            } else {
+                // User is logged in but has no profile
+                dashboardContent = (
+                    <div>
+                        <p className="lead text-muted">Welcome {user.name}</p>
+                        <p>You have not yet setup a profile, please add some info</p>
+                        <Link to="/create-profile" className="btn btn-lg" style={{ backgroundColor: '#C3E2DD', color: 'white' }}>
+                            Create Profile
+                        </Link>
+                    </div>
+                );
+            }
+        }
+
         return (
-            <div>
-                This is dashboard
+            <div className="dashboard">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h1 className="display-4">Dashboard</h1>
+                            {dashboardContent}
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
-export default connect(null, { getCurrentProfile })(Dashboard);
+const mapStateToProps = (state) => {
+    return {
+        profile: state.profile,
+        auth: state.auth,
+    };
+}
+
+Dashboard.propTypes = {
+    profile: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);

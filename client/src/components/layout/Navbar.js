@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 import { clearCurrentProfile } from '../../actions/profileActions';
 
-import './index.css';
 import icon from '../../img/icon.png';
 
 class Navbar extends Component {
@@ -44,9 +43,17 @@ class Navbar extends Component {
         );
 
         return (
-            <nav className="navbar navbar-expand-sm mb-4 navbar-dark">
+            <nav className="navbar navbar-expand-sm mb-4 navbar-dark" style={{ backgroundColor: '#62B8B1' }}>
                 <div className="container">
-                    <Link to="/" className="navbar-brand" ><img className="icon mr-2" src={icon} alt="icon" />DevConnector</Link>
+                    <Link to="/" className="navbar-brand" >
+                        <img
+                            className="icon mr-2"
+                            src={icon}
+                            alt="icon"
+                            style={{ height: '30px', width: '30px', borderRadius: '2px' }}
+                        />
+                        DevConnector
+                    </Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
                         <span className="navbar-toggler-icon"></span>
                     </button>

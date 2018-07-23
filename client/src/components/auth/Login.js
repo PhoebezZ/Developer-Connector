@@ -72,7 +72,7 @@ class Login extends Component {
                                     onChange={this.onChange}
                                     error={errors.password}
                                 />
-                                <input type="submit" className="btn btn-block mt-4 button" />
+                                <input type="submit" className="btn btn-block mt-4" style={{ backgroundColor: '#C3E2DD', color: 'white' }} />
                             </form>
                         </div>
                     </div>
