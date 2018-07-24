@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
+import { createProfile } from '../../actions/profileActions';
 
 class CreateProfile extends Component {
     constructor(props) {
@@ -28,6 +30,12 @@ class CreateProfile extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({ errors: nextProps.errors });
+        }
+    }
+
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value });
     }
@@ -35,14 +43,23 @@ class CreateProfile extends Component {
     onSubmit = e => {
         e.preventDefault();
 
-        console.log("submit");
+        const profileData = {
+            handle: this.state.handle,
+            company: this.state.company,
+            website: this.state.website,
+            location: this.state.location,
+            status: this.state.status,
+            skills: this.state.skills,
+            githubusername: this.state.githubusername,
+            bio: this.state.bio,
+            twitter: this.state.twitter,
+            facebook: this.state.facebook,
+            linkedin: this.state.linkedin,
+            youtube: this.state.youtube,
+            instagram: this.state.instagram
+        };
 
-        // const userData = {
-        //     email: this.state.email,
-        //     password: this.state.password,
-        // };
-
-        // this.props.loginUser(userData);
+        this.props.createProfile(profileData, this.props.history);
     }
 
     render() {
@@ -103,7 +120,7 @@ class CreateProfile extends Component {
 
         // Select options for status
         const options = [
-            { label: 'Select Professional Status', value: 0 },
+            { label: '* Select Professional Status', value: 0 },
             { label: 'Developer', value: 'Developer' },
             { label: 'Junior Developer', value: 'Junior Developer' },
             { label: 'Senior Developer', value: 'Senior Developer' },
@@ -194,7 +211,7 @@ class CreateProfile extends Component {
                                     this.setState(prevState => ({
                                         displaySocialInputs: !prevState.displaySocialInputs
                                     }));
-                                }} className="mb-3"><button className="btn btn-light">
+                                }} className="mb-3"><button type="button" className="btn btn-light">
                                         Add Social Network Links
                                 </button>
                                     <span className="text-muted">Optional</span>
@@ -212,7 +229,8 @@ class CreateProfile extends Component {
 
 CreateProfile.propTypes = {
     profile: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
+    createProfile: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -220,4 +238,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(mapStateToProps, { createProfile })(withRouter(CreateProfile));
