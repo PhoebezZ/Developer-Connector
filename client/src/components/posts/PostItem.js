@@ -2,10 +2,29 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { deletePost, addLike, removeLike } from '../../actions/postActions';
 
 class PostItem extends Component {
     onDeleteClick = (id) => {
-        console.log(id);
+        this.props.deletePost(id);
+    }
+
+    onLikeClick = (id) => {
+        this.props.addLike(id);
+    }
+
+    onUnlikeClick = (id) => {
+        this.props.removeLike(id);
+    }
+
+    findUserLike(likes) {
+        const { auth } = this.props;
+        if (likes.filter(like => like.user === auth.user.id).length > 0) {
+            console.log("true");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     render() {
@@ -23,11 +42,12 @@ class PostItem extends Component {
                     </div>
                     <div className="col-md-10">
                         <p className="lead">{post.text}</p>
-                        <button type="button" className="btn btn-light mr-1">
-                            <i className="text-info fas fa-thumbs-up"></i>
+                        <button onClick={() => this.onLikeClick(post._id)} type="button" className="btn btn-light mr-1">
+                            <i className={`fas fa-thumbs-up`} style={this.findUserLike(post.likes) ? { color: '#62B8B1' } : null}></i>
+
                             <span className="badge badge-light">{post.likes.length}</span>
                         </button>
-                        <button type="button" className="btn mr-1" style={{ color: '#62B8B1' }}>
+                        <button onClick={() => this.onUnlikeClick(post._id)} type="button" className="btn btn-light mr-1">
                             <i className="text-secondary fas fa-thumbs-down"></i>
                         </button>
                         <Link to={`/post/${post._id}`} className="btn mr-1" style={{ backgroundColor: '#62B8B1', color: 'white' }}>
@@ -48,10 +68,13 @@ class PostItem extends Component {
 PostItem.propTypes = {
     post: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
+    deletePost: PropTypes.func.isRequired,
+    addLike: PropTypes.func.isRequired,
+    removeLike: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps)(PostItem);
+export default connect(mapStateToProps, { deletePost, addLike, removeLike })(PostItem);
