@@ -46,7 +46,6 @@ class PostForm extends Component {
                     <div className="card-body">
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
-                                {/* <textarea className="form-control form-control-lg" placeholder="Create a post"></textarea> */}
                                 <TextAreaFieldGroup
                                     placeholder="Create a post"
                                     name="text"
