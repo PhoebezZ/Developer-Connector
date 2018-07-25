@@ -28,7 +28,7 @@ class PostItem extends Component {
     }
 
     render() {
-        const { post, auth } = this.props;
+        const { post, auth, showActions } = this.props;
 
         return (
             <div className="card card-body mb-3">
@@ -42,27 +42,31 @@ class PostItem extends Component {
                     </div>
                     <div className="col-md-10">
                         <p className="lead">{post.text}</p>
-                        <button onClick={() => this.onLikeClick(post._id)} type="button" className="btn btn-light mr-1">
+                        {showActions ? (<span><button onClick={() => this.onLikeClick(post._id)} type="button" className="btn btn-light mr-1">
                             <i className={`fas fa-thumbs-up`} style={this.findUserLike(post.likes) ? { color: '#62B8B1' } : null}></i>
 
                             <span className="badge badge-light">{post.likes.length}</span>
                         </button>
-                        <button onClick={() => this.onUnlikeClick(post._id)} type="button" className="btn btn-light mr-1">
-                            <i className="text-secondary fas fa-thumbs-down"></i>
-                        </button>
-                        <Link to={`/post/${post._id}`} className="btn mr-1" style={{ backgroundColor: '#62B8B1', color: 'white' }}>
-                            Comments
-                        </Link>
-                        {post.user === auth.user.id ? (
-                            <button onClick={() => this.onDeleteClick(post._id)} type="button" className="btn btn-danger mr-1">
-                                <i className="fas fa-times"></i>
+                            <button onClick={() => this.onUnlikeClick(post._id)} type="button" className="btn btn-light mr-1">
+                                <i className="text-secondary fas fa-thumbs-down"></i>
                             </button>
-                        ) : null}
+                            <Link to={`/post/${post._id}`} className="btn mr-1" style={{ backgroundColor: '#62B8B1', color: 'white' }}>
+                                Comments
+                        </Link>
+                            {post.user === auth.user.id ? (
+                                <button onClick={() => this.onDeleteClick(post._id)} type="button" className="btn btn-danger mr-1">
+                                    <i className="fas fa-times"></i>
+                                </button>
+                            ) : null}</span>) : null}
                     </div>
                 </div>
             </div>
         )
     }
+}
+
+PostItem.defaultProps = {
+    showActions: true
 }
 
 PostItem.propTypes = {
